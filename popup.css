@@ -1,5 +1,5 @@
 :root {
-  --highlight-color: #039bf4;
+  --highlight-color: #0098f1;
   --border-color: rgba(0, 0, 0, .12);
 }
 
@@ -91,21 +91,23 @@ welcome {
 
 welcome section,
 welcome footer {
-  margin: 58px 0;
+  margin: 30px 0 45px;
 }
 
 welcome img {
   width: 240px;
   margin-bottom: -6px;
+  fill: blue;
 }
 
 tip {
-  background-color: #FAFAFA;
+  background-color: #585f67;
   display: flex;
   padding: 16px;
   border-radius: 3px;
   border: 1px solid var(--border-color);
   margin-top: 16px;
+  color: #fff;
 }
 
 tip i {
@@ -182,6 +184,7 @@ input-row .button-text {
   text-overflow: ellipsis;
   font-size: 16px;
   line-height: 21px;
+  color: #323233;
 }
 
 .stash-sub-title {
