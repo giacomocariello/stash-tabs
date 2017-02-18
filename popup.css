@@ -1,5 +1,5 @@
 :root {
-  --highlight-color: #0098f1;
+  --highlight-color: #0089da;
   --border-color: rgba(0, 0, 0, .12);
 }
 
@@ -24,14 +24,13 @@ main {
 }
 
 .button-text {
-  line-height: 26px;
-  font-weight: 600;
+  line-height: 24px;
   border: 1px solid var(--highlight-color);
   color: var(--highlight-color);
   border-radius: 3px;
   background: #fff;
   font-size: 14px;
-  padding: 0 24px;
+  padding: 0 19px;
   outline: none;
   cursor: pointer;
 }
@@ -91,19 +90,18 @@ welcome {
 
 welcome section,
 welcome footer {
-  margin: 30px 0 45px;
+  margin: 45px 0;
 }
 
 welcome img {
   width: 240px;
   margin-bottom: -6px;
-  fill: blue;
 }
 
 tip {
   background-color: #585f67;
   display: flex;
-  padding: 16px;
+  padding: 12px 16px;
   border-radius: 3px;
   border: 1px solid var(--border-color);
   margin-top: 16px;
@@ -134,7 +132,7 @@ input-row input {
 
 input-row .button-text {
   margin-left: 16px;
-  min-width: 146px;
+  min-width: 132px;
 }
 
 #stash-list {
