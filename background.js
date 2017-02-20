@@ -6,7 +6,7 @@ window.unstash =
     async function(stashId, stash, shouldUpdateMessages, sameWindow) {
   await deleteStash(stashId);
   const chromeWindow =
-      await sameWindow ? openStashInSameWindow(stash) : openStash(stash);
+      await(sameWindow ? openStashInSameWindow(stash) : openStash(stash));
   await chrome.promise.storage.local.set(
       {[getStashNameStorageKey(chromeWindow.id)]: stash.name});
   if (shouldUpdateMessages) {
