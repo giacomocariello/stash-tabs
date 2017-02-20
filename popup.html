@@ -39,8 +39,7 @@
     <header>
       <tip v-if="!messages.openStash && !isEmpty(stashes)">
         <div class="content">
-          <!--TODO: or {{ modifierKey }}-click to open in the current window.-->
-          Your stashes are displayed below. Click one to open it in a new window.
+          Your stashes are displayed below. Click one to open it in a new window or {{ modifierKey }}-click to open in the current window.
         </div>
       </tip>
       <input-row v-if="mode == 'default'">
@@ -58,8 +57,8 @@
       </input-row>
     </header>
     <ul id="stash-list" v-if="!isEmpty(stashes)">
-      <li role="button" tabindex="0" class="stash" v-for="stash in stashes | order-by 'timestamp' -1" v-on:click="unstash($key, stash)"
-  @keydown.enter="unstash($key, stash)" @keydown.space="unstash($key, stash)" v-on:focus="handleFocus" v-on:blur="handleBlur">
+      <li role="button" tabindex="0" class="stash" v-for="stash in stashes | order-by 'timestamp' -1" v-on:click="unstash($key, stash, $event)"
+  @keydown.enter="unstash($key, stash, $event)" @keydown.space="unstash($key, stash)" v-on:focus="handleFocus" v-on:blur="handleBlur">
         <span class="stash-primary-content">
           <span class="stash-title">{{ stash.name || stashNamePlaceholder }}</span>
         <span class="stash-sub-title">{{ stash.tabs.length | tabs }} &bull; {{ stash.timestamp | from-now }}</span>

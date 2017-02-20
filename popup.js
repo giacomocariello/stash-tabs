@@ -106,11 +106,12 @@ const init = async function() {
       topUp: function(stashId) {
         topUp(stashId, highlightedTabs);
       },
-      unstash: function(stashId, stash) {
+      unstash: function(stashId, stash, $event) {
         // Have to call the function in the background page because the popup
         // closes too early.
         chrome.extension.getBackgroundPage().unstash(
-            stashId, stash, !this.messages.openStash);
+            stashId, stash, !this.messages.openStash,
+            $event.metaKey || $event.ctrlKey);
         // For better visual transition.
         window.close();
       },
