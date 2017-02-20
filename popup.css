@@ -52,6 +52,7 @@ main {
   padding: 6px;
   padding-left: 7px;
   cursor: pointer;
+  color: #353535;
 }
 
 .button-icon i {
