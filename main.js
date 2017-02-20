@@ -113,17 +113,15 @@ const openStash = async function(stash) {
   return window;
 };
 
-const openStashInSameWindow = async function(stash) {
-  const window = await chrome.promise.windows.getLastFocused({populate: true});
-  const originalNumberOfTabs = window.tabs.length;
+const openStashInExistingWindow = async function(stash, chromeWindow) {
+  const originalNumberOfTabs = chromeWindow.tabs.length;
   const activeTabIndex = ('activeTabIndex' in stash) ? stash.activeTabIndex :
                                                        (stash.tabs.length - 1);
   await Promise.all(stash.tabs.map((tab, index) => chrome.promise.tabs.create({
-    windowId: window.id,
+    windowId: chromeWindow.id,
     url: tab.url,
     active: index === activeTabIndex
   })));
-  return window;
 };
 
 const deleteStash = async function(stashId) {

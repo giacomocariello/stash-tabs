@@ -36,12 +36,15 @@ const moveFocus = (direction, event) => {
 };
 
 const init = async function() {
-  const [highlightedTabs, windowTabs, stashes, messages, originalStashName] =
-      await Promise.all([
-        chrome.promise.tabs.query({currentWindow: true, highlighted: true}),
-        chrome.promise.tabs.query({currentWindow: true}), getStashes(),
-        getMessages(), getOriginalStashName()
-      ]);
+  const
+      [highlightedTabs, windowTabs, stashes, messages, originalStashName,
+       currentWindow] =
+          await Promise.all([
+            chrome.promise.tabs.query({currentWindow: true, highlighted: true}),
+            chrome.promise.tabs.query({currentWindow: true}), getStashes(),
+            getMessages(), getOriginalStashName(),
+            chrome.promise.windows.getCurrent({populate: true})
+          ]);
 
   const mode = (() => {
     if (windowTabs.length == 1) {
@@ -111,7 +114,7 @@ const init = async function() {
         // closes too early.
         chrome.extension.getBackgroundPage().unstash(
             stashId, stash, !this.messages.openStash,
-            $event.metaKey || $event.ctrlKey);
+            ($event.metaKey || $event.ctrlKey) ? currentWindow : undefined);
         // For better visual transition.
         window.close();
       },

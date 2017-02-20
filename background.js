@@ -2,11 +2,17 @@ chrome.runtime.onStartup.addListener(() => {
   chrome.promise.storage.local.clear();
 });
 
+/**
+ * If chromeWindow is provided, opens in this window.
+ */
 window.unstash =
-    async function(stashId, stash, shouldUpdateMessages, sameWindow) {
+    async function(stashId, stash, shouldUpdateMessages, chromeWindow) {
   await deleteStash(stashId);
-  const chromeWindow =
-      await(sameWindow ? openStashInSameWindow(stash) : openStash(stash));
+  if (chromeWindow) {
+    await openStashInExistingWindow(stash, chromeWindow);
+  } else {
+    chromeWindow = await openStash(stash);
+  }
   await chrome.promise.storage.local.set(
       {[getStashNameStorageKey(chromeWindow.id)]: stash.name});
   if (shouldUpdateMessages) {
