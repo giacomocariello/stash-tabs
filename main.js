@@ -114,7 +114,7 @@ const openStash = async function(stash) {
 };
 
 const openStashInSameWindow = async function(stash) {
-  const window = await chrome.promise.windows.getCurrent({populate: true});
+  const window = await chrome.promise.windows.getLastFocused({populate: true});
   const originalNumberOfTabs = window.tabs.length;
   const activeTabIndex = ('activeTabIndex' in stash) ? stash.activeTabIndex :
                                                        (stash.tabs.length - 1);
