@@ -5,7 +5,7 @@ const tryToFocusOnInput = () => {
       Array.prototype.slice.call(document.querySelectorAll('input'));
   _.remove(inputEls, inputEl => inputEl.offsetParent === null);
   if (inputEls.length) {
-    inputEls[0].focus();
+    inputEls[0].select();
   };
 };
 
