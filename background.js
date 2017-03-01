@@ -2,20 +2,23 @@ chrome.runtime.onStartup.addListener(() => {
   chrome.promise.storage.local.clear();
 });
 
-/**
- * If chromeWindow is provided, opens in this window.
- */
-window.unstash =
-    async function(stashId, stash, shouldUpdateMessages, chromeWindow) {
+window.unstash = async function(
+    stashId, stash, shouldUpdateMessages, shouldOpenInCurrentWindow,
+    chromeWindow) {
   await deleteStash(stashId);
-  if (chromeWindow) {
+  if (shouldOpenInCurrentWindow) {
     await openStashInExistingWindow(stash, chromeWindow);
   } else {
+    if (chromeWindow.tabs.length == 1 &&
+        chromeWindow.tabs[0].url == 'chrome://newtab/') {
+      // Don't wait.
+      chrome.promise.windows.remove(chromeWindow.id);
+    }
     chromeWindow = await openStash(stash);
   }
   await chrome.promise.storage.local.set(
       {[getStashNameStorageKey(chromeWindow.id)]: stash.name});
   if (shouldUpdateMessages) {
-    setMessageRead('openStash');
+    await setMessageRead('openStash');
   }
 };

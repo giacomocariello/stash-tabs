@@ -112,9 +112,11 @@ const init = async function() {
       unstash: function(stashId, stash, $event) {
         // Have to call the function in the background page because the popup
         // closes too early.
+        //
+        // Don't wait.
         chrome.extension.getBackgroundPage().unstash(
             stashId, stash, !this.messages.openStash,
-            ($event.metaKey || $event.ctrlKey) ? currentWindow : undefined);
+            $event.metaKey || $event.ctrlKey, currentWindow);
         // For better visual transition.
         window.close();
       },
