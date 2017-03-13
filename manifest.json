@@ -1,6 +1,6 @@
 {
   "name": "Stash Tabs",
-  "version": "1.42",
+  "version": "1.43",
   "minimum_chrome_version": "55",
   "description": "A session manager with little UI and a lot of attention to detail.",
   "permissions": [
